@@ -3,7 +3,38 @@ import Image from 'next/image'
 import styles from './singlePost.module.css'
 import { imageConfigDefault } from 'next/dist/shared/lib/image-config'
 
-function SinglePostPage() {
+
+export type Post = {
+  id: number
+  title: string
+  body: string
+}
+
+
+const getData = async (slug:string): Promise<Post[]> => {
+
+  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`)
+
+  if (!res.ok) {
+    throw new Error('Something went wrong...')
+  }
+
+  return res.json()
+}
+
+
+type SinglePostPageProps = {
+  params: {
+    slug: string
+  }
+}
+
+
+
+const SinglePostPage = async ({ params }: SinglePostPageProps) => {
+  console.log(params)
+  const { slug } = params
+  const post = await getData(slug)
   return (
     <div className={styles.container}>
       <div className={styles.imgContainer}>
@@ -32,8 +63,7 @@ function SinglePostPage() {
         </div>
 
         <div className="flex gap-[100px]">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquam
-          sint, saepe illum sed nihil ratione dicta reiciendis alias cumque est?
+          {/* {post.body} */}
         </div>
       </div>
     </div>
