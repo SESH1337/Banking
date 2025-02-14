@@ -1,7 +1,7 @@
+// src/app/blog/[slug]/page.tsx
 import React from 'react'
 import Image from 'next/image'
 import styles from './singlePost.module.css'
-import { GetStaticPaths, GetStaticProps } from 'next'
 
 export type Post = {
   id: number
@@ -9,53 +9,43 @@ export type Post = {
   body: string
 }
 
-// Fetch post data based on slug
-const getData = async (slug: string) => {
+// Function to fetch post data by slug (post ID in this case)
+const getData = async (slug: string): Promise<Post> => {
   const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`)
-
   if (!res.ok) {
     throw new Error('Something went wrong...')
   }
-
   return res.json()
 }
 
-// Fetch list of slugs for dynamic paths
-const fetchSlugsFromAPI = async () => {
+// Function to fetch all post slugs
+const fetchSlugsFromAPI = async (): Promise<string[]> => {
   const res = await fetch('https://jsonplaceholder.typicode.com/posts')
+  if (!res.ok) {
+    throw new Error('Failed to fetch slugs')
+  }
   const posts = await res.json()
-  return posts.map((post: Post) => post.id.toString()) // Return slugs (in this case, post IDs)
+  // Return post IDs as strings to be used as slugs
+  return posts.map((post: Post) => post.id.toString())
 }
 
-type SinglePostPageProps = {
-  post: Post
-}
-
-// Get static paths for dynamic slugs
-export const getStaticPaths: GetStaticPaths = async () => {
+// This function generates the static params for each dynamic route
+export async function generateStaticParams() {
   const slugs = await fetchSlugsFromAPI()
+  return slugs.map((slug) => ({ slug }))
+}
 
-  const paths = slugs.map((slug: any) => ({
-    params: { slug },
-  }))
-
-  return {
-    paths,
-    fallback: false, // False ensures that if a user visits a path that isn't generated, they get a 404
+type PageProps = {
+  params: {
+    slug: string
   }
 }
 
-// Get static props for each post based on slug
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { slug } = params!
-  const post = await getData(slug as string)
+// The page component is async and fetches data directly
+const SinglePostPage = async ({ params }: PageProps) => {
+  const { slug } = params
+  const post = await getData(slug)
 
-  return {
-    props: { post },
-  }
-}
-
-const SinglePostPage = ({ post }: SinglePostPageProps) => {
   return (
     <div className={styles.container}>
       <div className={styles.imgContainer}>
@@ -81,7 +71,6 @@ const SinglePostPage = ({ post }: SinglePostPageProps) => {
             <span className={styles.detailTitle}>Author</span>
             <span className="font-md">Date</span>
           </div>
-
           <div className="flex gap-[10px] flex-col">
             <span className="font-bold text-gray-200">Published</span>
             <span className="font-md">01.01.2025</span>
