@@ -1,5 +1,6 @@
 import React from 'react'
 import PostCard from '../_components/postCard/postCard'
+import { GetStaticPaths, GetStaticProps } from 'next'
 
 export type Post = {
   id: number

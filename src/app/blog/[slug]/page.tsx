@@ -1,34 +1,34 @@
-import React from 'react';
-import Image from 'next/image';
-import styles from './singlePost.module.css';
-import { imageConfigDefault } from 'next/dist/shared/lib/image-config';
+import React from 'react'
+import Image from 'next/image'
+import styles from './singlePost.module.css'
+import { imageConfigDefault } from 'next/dist/shared/lib/image-config'
+import { GetStaticPaths, GetStaticProps } from 'next'
 
 export type Post = {
-  id: number;
-  title: string;
-  body: string;
-};
+  id: number
+  title: string
+  body: string
+}
 
 const getData = async (slug: string) => {
-  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`);
+  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`)
 
   if (!res.ok) {
-    throw new Error('Something went wrong...');
+    throw new Error('Something went wrong...')
   }
 
-  return res.json();
-};
+  return res.json()
+}
 
 type SinglePostPageProps = {
   params: {
-    slug: string;
-  };
-};
+    slug: string
+  }
+}
 
 const SinglePostPage = async ({ params }: SinglePostPageProps) => {
-
-  const { slug } = params;
-  const post = await getData(slug);
+  const { slug } = params
+  const post = await getData(slug)
 
   return (
     <div className={styles.container}>
@@ -60,7 +60,7 @@ const SinglePostPage = async ({ params }: SinglePostPageProps) => {
         <div className="flex gap-[100px]">{post.body}</div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SinglePostPage;
+export default SinglePostPage
