@@ -2,8 +2,7 @@
 
 import React, { useState } from 'react'
 import Image from 'next/image'
-// import NavLink from '@/app/_components/navbar/links/navlink/NavLink'
-import NavLink from '../links/navLink/NavLink'
+import NavLink from '../links/navlink/NavLink'
 
 type LinkProps = {
   title: string
