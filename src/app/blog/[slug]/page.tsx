@@ -1,7 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
 import styles from './singlePost.module.css'
-import { imageConfigDefault } from 'next/dist/shared/lib/image-config'
 import { GetStaticPaths, GetStaticProps } from 'next'
 
 export type Post = {
@@ -10,6 +9,7 @@ export type Post = {
   body: string
 }
 
+// Fetch post data based on slug
 const getData = async (slug: string) => {
   const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`)
 
@@ -20,20 +20,51 @@ const getData = async (slug: string) => {
   return res.json()
 }
 
+// Fetch list of slugs for dynamic paths
+const fetchSlugsFromAPI = async () => {
+  const res = await fetch('https://jsonplaceholder.typicode.com/posts')
+  const posts = await res.json()
+  return posts.map((post: Post) => post.id.toString()) // Return slugs (in this case, post IDs)
+}
+
 type SinglePostPageProps = {
-  params: {
-    slug: string
+  post: Post
+}
+
+// Get static paths for dynamic slugs
+export const getStaticPaths: GetStaticPaths = async () => {
+  const slugs = await fetchSlugsFromAPI()
+
+  const paths = slugs.map((slug: any) => ({
+    params: { slug },
+  }))
+
+  return {
+    paths,
+    fallback: false, // False ensures that if a user visits a path that isn't generated, they get a 404
   }
 }
 
-const SinglePostPage = async ({ params }: SinglePostPageProps) => {
-  const { slug } = params
-  const post = await getData(slug)
+// Get static props for each post based on slug
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const { slug } = params!
+  const post = await getData(slug as string)
 
+  return {
+    props: { post },
+  }
+}
+
+const SinglePostPage = ({ post }: SinglePostPageProps) => {
   return (
     <div className={styles.container}>
       <div className={styles.imgContainer}>
-        <Image src="/blog-img.avif" alt="" fill className={styles.img} />
+        <Image
+          src="/blog-img.avif"
+          alt="Blog image"
+          fill
+          className={styles.img}
+        />
       </div>
 
       <div className={styles.textContainer}>
@@ -42,7 +73,7 @@ const SinglePostPage = async ({ params }: SinglePostPageProps) => {
           <Image
             className={styles.avatar}
             src="/ideas.webp"
-            alt=""
+            alt="Author"
             width={50}
             height={50}
           />
