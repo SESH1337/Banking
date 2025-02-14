@@ -4,12 +4,7 @@ type BlogLayoutProps = {
   children: React.ReactNode
 }
 const BlogLayout: React.FC<BlogLayoutProps> = function ({ children }) {
-  return (
-    <div>
-      <h2></h2>
-      {children}
-    </div>
-  )
+  return <div>{children}</div>
 }
 
 export default BlogLayout

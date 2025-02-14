@@ -1,4 +1,3 @@
-import { type } from 'os'
 import React from 'react'
 import PostCard from '../_components/postCard/postCard'
 
@@ -6,6 +5,14 @@ export type Post = {
   id: number
   title: string
   body: string
+}
+
+export type Photo = {
+  albumId: number
+  id: number
+  title: string
+  url: string
+  thumbnailUrl: string
 }
 
 const getData = async (): Promise<Post[]> => {
@@ -20,12 +27,11 @@ const getData = async (): Promise<Post[]> => {
 
 const BlogPage = async (): Promise<JSX.Element> => {
   const posts = await getData()
-
   return (
     <div className="flex gap-5 flex-wrap">
       {posts.map((post) => (
         <div key={post.id} className="w-[30%] md:w-[45%] sm:w-full">
-          <PostCard post={post}/>
+          <PostCard post={post} photos={[]} />
         </div>
       ))}
     </div>

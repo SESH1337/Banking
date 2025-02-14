@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Home() {
   return (
@@ -10,12 +11,16 @@ export default function Home() {
           order to make the bank's financial products
         </p>
         <div className="flex gap-[20px]">
-          <button className="p-3 min-w-[120px] cursor-pointer border-none rounded-md text-white bg-blue-600 text-[16px] font-medium">
-            Learn more
-          </button>
-          <button className="p-3 min-w-[120px] cursor-pointer border-none rounded-md bg-white text-black text-[16px] font-medium">
-            Contact
-          </button>
+          <Link href="./about">
+            <button className="p-3 min-w-[120px] cursor-pointer border-none rounded-md text-white bg-blue-600 text-[16px] font-medium">
+              Learn more
+            </button>
+          </Link>
+          <Link href="./contact">
+            <button className="p-3 min-w-[120px] cursor-pointer border-none rounded-md bg-white text-black text-[16px] font-medium">
+              Contact
+            </button>
+          </Link>
         </div>
 
         <div className="relative w-[500px] h-[50px] grayscale">

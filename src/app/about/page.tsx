@@ -32,7 +32,6 @@ function AboutPage() {
         </div>
       </div>
 
-      {/* Image Container */}
       <div className="flex-1 relative">
         <Image
           style={{
@@ -50,11 +49,3 @@ function AboutPage() {
 }
 
 export default AboutPage
-{
-  /* <Image
-src="/bank-image.png"
-alt="Indroduction bank serverice image"
-fill
-className="object-contain"
-/> */
-}
