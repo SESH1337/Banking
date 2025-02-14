@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import Image from 'next/image'
-import NavLink from '../links/navlink/NavLink'
+import NavLink from './navLink/NavLink'
 
 type LinkProps = {
   title: string

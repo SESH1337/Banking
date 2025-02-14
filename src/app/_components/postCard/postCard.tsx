@@ -2,7 +2,8 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { Post, Photo } from '@/app/blog/page'
+// import { Post, Photo } from '@/app/blog/page'
+import { Post, Photo } from '../../blog/page'
 
 type PostCardProps = {
   post: Post

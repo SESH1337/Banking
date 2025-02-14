@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
-import Links from '@/app/_components/navbar/links/Links'
+import Links from './links/Links'
 
 export function Navbar() {
   return (
