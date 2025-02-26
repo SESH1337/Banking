@@ -24,7 +24,7 @@ export default function Home() {
         </div>
 
         <div className="relative w-[500px] h-[50px] grayscale">
-          <Image src="/brands.png" alt="Contact us" fill className="" />
+          <Image src="/Banking/brands.png" alt="Contact us" fill className="" />
         </div>
       </div>
       <div className="flex-1 relative rounded-full clip-path-blob h-[350px] mt-[55px]">

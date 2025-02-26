@@ -38,7 +38,7 @@ function AboutPage() {
             clipPath:
               'polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)',
           }}
-          src="/bank-image.png"
+          src="/Banking/bank-image.png"
           alt="About Image"
           fill
           className="object-contain"

@@ -56,7 +56,7 @@ export default function Links() {
 
       {/* Mobile Hamburger Menu */}
       <Image
-        src="/menu.png"
+        src="/Banking/menu.png"
         alt="menu icon"
         width={25}
         height={25}

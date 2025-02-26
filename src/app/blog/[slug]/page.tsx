@@ -50,7 +50,7 @@ const SinglePostPage = async ({ params }: PageProps) => {
     <div className={styles.container}>
       <div className={styles.imgContainer}>
         <Image
-          src="/blog-img.avif"
+          src="/Banking/blog-img.avif"
           alt="Blog image"
           fill
           className={styles.img}
@@ -62,7 +62,7 @@ const SinglePostPage = async ({ params }: PageProps) => {
         <div className={styles.detail}>
           <Image
             className={styles.avatar}
-            src="/ideas.webp"
+            src="/Banking/ideas.webp"
             alt="Author"
             width={50}
             height={50}

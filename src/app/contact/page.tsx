@@ -7,7 +7,7 @@ function ContactPage() {
       {/* Image Container */}
       <div className="flex-1 h-[500px] relative">
         <Image
-          src="/contact.png"
+          src="/Banking/contact.png"
           alt=""
           fill
           className="object-contain hidden md:block"

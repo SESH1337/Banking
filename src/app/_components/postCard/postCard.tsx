@@ -16,7 +16,7 @@ export default function PostCard({ post }: PostCardProps) {
       <div className="flex">
         <div className="relative w-[90%] h-[400px]">
           <Image
-            src="/bank-image.png"
+            src="/Banking/bank-image.png"
             alt={'Blog Image'}
             fill
             className="object-cover"
