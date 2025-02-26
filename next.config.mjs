@@ -15,7 +15,9 @@
 //   },
 //   trailingSlash: true, // Ensures proper routing
 // }
-module.exports = {
-  basePath: '/Banking',
-  assetPrefix: '/Banking/',
+const isProd = process.env.NODE_ENV === 'production'
+
+export default {
+  basePath: isProd ? '/Banking' : '',
+  assetPrefix: isProd ? '/Banking/' : '',
 }
