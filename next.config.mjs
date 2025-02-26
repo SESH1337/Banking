@@ -15,3 +15,7 @@
 //   },
 //   trailingSlash: true, // Ensures proper routing
 // }
+module.exports = {
+  basePath: '/Banking',
+  assetPrefix: '/Banking/',
+}
